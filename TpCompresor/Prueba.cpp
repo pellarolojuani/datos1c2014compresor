@@ -27,7 +27,7 @@ using namespace std;
 void testProbarVentana(){
 
 	Ventana* unaVentana = new Ventana();
-	ManejoArchivo unArchivo = ManejoArchivo("prueba");
+	ManejoArchivo unArchivo = ManejoArchivo("unArchivoDePrueba.txt");
 	int cantidad = unArchivo.contarTerminosDeDocumento();
 
 	for (int i = 0; i < cantidad; i++){
@@ -58,8 +58,8 @@ void testTransformarBinarioAChar(){
 int main(int argc, char *argv[]){
 	/*Aca voy habilitando las pruebas que quiera correr*/
 
-	//testProbarVentana();
-	//testTransformarBinarioAChar();
+	testProbarVentana();
+	testTransformarBinarioAChar();
 
 	return 0;
 }
