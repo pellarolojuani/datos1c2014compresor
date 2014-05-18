@@ -1,0 +1,4 @@
+archivo de prueba.
+Lee caracter a caracter y los va almacenando en la ventana de memoria desplazando a los caracteres anteriores.
+
+fin de archivo.
