@@ -20,6 +20,8 @@ Lz77::~Lz77() {
 
 void Lz77::compresor() {
 
+	//esto es una prueba de commit
+
 }
 
 void Lz77::descompresor() {
