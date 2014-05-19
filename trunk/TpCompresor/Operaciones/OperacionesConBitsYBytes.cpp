@@ -5,14 +5,11 @@
  *      Author: juanignacio
  */
 
-using namespace std;
-#include "../Constantes.h"
-#include <cmath>
-
-typedef unsigned char byte;
+#include "OperacionesConBitsYBytes.h"
 
 
-byte binarioAchar(string secuencia) {
+
+byte OperacionesConBitsYBytes::binarioAchar(string secuencia) {
 /*Recibe una secuencia de 1s y 0s y devuelve su correspondiente caracter ASCII*/
 
   if (secuencia.size() != 8) return '\0';
