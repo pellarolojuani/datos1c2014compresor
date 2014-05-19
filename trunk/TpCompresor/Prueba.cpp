@@ -5,10 +5,10 @@
  *      Author: juanignacio
  */
 
-#include "manejoArchivo/ManejoArchivo.cpp"
+#include "manejoArchivo/ManejoArchivo.h"
 #include "Constantes.h"
-#include "lz77/Ventana.cpp"
-#include "Operaciones/OperacionesConBitsYBytes.cpp"
+#include "lz77/Ventana.h"
+#include "Operaciones/OperacionesConBitsYBytes.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -47,7 +47,8 @@ void testProbarVentana(){
 void testTransformarBinarioAChar(){
 	string unaCadenaBinaria = "01000000";
 	byte valor;
-	valor = binarioAchar(unaCadenaBinaria);
+	OperacionesConBitsYBytes operaciones = OperacionesConBitsYBytes();
+	valor = operaciones.binarioAchar(unaCadenaBinaria);
 	cout<<"BINARIO(64) = "<<valor<<endl;
 
 	return;
