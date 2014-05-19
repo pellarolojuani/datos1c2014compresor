@@ -54,13 +54,25 @@ void testTransformarBinarioAChar(){
 	return;
 }
 
+void testAlmanenarArchivoEnBuffer(string pathEntrada){
+	ManejoArchivo unArchivo = ManejoArchivo(pathEntrada);
+	unArchivo.leerArchivoYGuardarEnMemoria();
 
+	 int n = static_cast<int>(unArchivo.getVbuffer().size());
+	    for (int i = 0; i < n; i++)
+	    {
+	        	cout<<"aca llega" <<unArchivo.getVbuffer()[i]<<endl;
+	    }
+	unArchivo.cerrarArchivo();
+}
 
 int main(int argc, char *argv[]){
 	/*Aca voy habilitando las pruebas que quiera correr*/
 
-	testProbarVentana();
-	testTransformarBinarioAChar();
+	//testProbarVentana();
+	//testTransformarBinarioAChar();
+	testAlmanenarArchivoEnBuffer(argv[2]);
 
 	return 0;
 }
+
