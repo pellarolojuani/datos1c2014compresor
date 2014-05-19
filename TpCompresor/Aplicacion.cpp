@@ -9,23 +9,23 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "manejoArchivo/ManejoArchivo.cpp"
+#include "manejoArchivo/ManejoArchivo.h"
 #include "Constantes.h"
-#include "lz77/Lz77.cpp"
-#include "lz77/Ventana.cpp"
+#include "lz77/Lz77.h"
+#include "lz77/Ventana.h"
 
 using namespace std;
 
 string parametro;
 bool errorParam = false;
 
-int main(int argc, char * argv[]) {
+/*int main(int argc, char * argv[]) {
 
-	/*
-	 *  para ejecutarlo, una vez creado el ejecutable
-	 *  ./<nombre del ejecutable> -<c o d> <directorio archivo>
-	 *  si quiero descomprimir -d, si quiero comprimir -c
-	 */
+
+	 // para ejecutarlo, una vez creado el ejecutable
+	 // ./<nombre del ejecutable> -<c o d> <directorio archivo>
+	 // si quiero descomprimir -d, si quiero comprimir -c
+
 
 
 	if (argc > 1) {
@@ -52,4 +52,4 @@ int main(int argc, char * argv[]) {
 	ma.cerrarArchivo();
 
 	return 0;
-}
+}*/
