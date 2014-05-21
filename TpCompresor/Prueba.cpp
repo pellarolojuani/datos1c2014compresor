@@ -22,6 +22,7 @@ using namespace std;
  * PARA CHEQUEAR QUE FUNCIONEN BIEN!
  *
  *
+ *
  * */
 
 void testProbarVentana(){
@@ -45,11 +46,117 @@ void testProbarVentana(){
 }
 
 void testTransformarBinarioAChar(){
-	string unaCadenaBinaria = "01000000";
+
+	string unaCadenaBinaria = "01000000"; //64
 	byte valor;
 	OperacionesConBitsYBytes operaciones = OperacionesConBitsYBytes();
 	valor = operaciones.binarioAchar(unaCadenaBinaria);
+	cout<<endl;
 	cout<<"BINARIO(64) = "<<valor<<endl;
+	cout<<"en Binario: "<<operaciones.charAbinario(valor)<<endl;
+	unaCadenaBinaria = "01000001"; //65
+	valor = operaciones.binarioAchar(unaCadenaBinaria);
+	cout<<endl;
+	cout<<"BINARIO(65) = "<<valor<<endl;
+	cout<<"en Binario: "<<operaciones.charAbinario(valor)<<endl;
+	unaCadenaBinaria = "01000010"; //66
+	valor = operaciones.binarioAchar(unaCadenaBinaria);
+	cout<<endl;
+	cout<<"BINARIO(66) = "<<valor<<endl;
+	cout<<"en Binario: "<<operaciones.charAbinario(valor)<<endl;
+	unaCadenaBinaria = "01000011"; //67
+	valor = operaciones.binarioAchar(unaCadenaBinaria);
+	cout<<endl;
+	cout<<"BINARIO(67) = "<<valor<<endl;
+	cout<<"en Binario: "<<operaciones.charAbinario(valor)<<endl;
+	cout<<endl;
+
+	return;
+}
+
+void testProbarCaracteresEspeciales(){
+
+	string binario;
+	OperacionesConBitsYBytes operaciones = OperacionesConBitsYBytes();
+
+	byte caracter = 'a';
+	binario = operaciones.charEspecialAbinario(caracter);
+	cout<<endl;
+	cout<<"a: "<<binario<<endl;
+	cout<<"recupero el caracter: "<<operaciones.getCharEspecial(binario)<<endl;
+	cout<<endl;
+
+	caracter = 'e';
+	binario = operaciones.charEspecialAbinario(caracter);
+	cout<<"e: "<<binario<<endl;
+	cout<<"recupero el caracter: "<<operaciones.getCharEspecial(binario)<<endl;
+	cout<<endl;
+
+	caracter = 'i';
+	binario = operaciones.charEspecialAbinario(caracter);
+	cout<<"i: "<<binario<<endl;
+	cout<<"recupero el caracter: "<<operaciones.getCharEspecial(binario)<<endl;
+	cout<<endl;
+
+	caracter = 'o';
+	binario = operaciones.charEspecialAbinario(caracter);
+	cout<<"o: "<<binario<<endl;
+	cout<<"recupero el caracter: "<<operaciones.getCharEspecial(binario)<<endl;
+	cout<<endl;
+
+	caracter = 'u';
+	binario = operaciones.charEspecialAbinario(caracter);
+	cout<<"u: "<<binario<<endl;
+	cout<<"recupero el caracter: "<<operaciones.getCharEspecial(binario)<<endl;
+	cout<<endl;
+
+	caracter = 't';
+	binario = operaciones.charEspecialAbinario(caracter);
+	cout<<"t: "<<binario<<endl;
+	cout<<"recupero el caracter: "<<operaciones.getCharEspecial(binario)<<endl;
+	cout<<endl;
+
+	caracter = '\n';
+	binario = operaciones.charEspecialAbinario(caracter);
+	cout<<"<finDeLinea>: "<<binario<<endl;
+	cout<<"recupero el caracter: "<<operaciones.getCharEspecial(binario)<<endl;
+	cout<<endl;
+
+	caracter = ' ';
+	binario = operaciones.charEspecialAbinario(caracter);
+	cout<<"<espacio>: "<<binario<<endl;
+	cout<<"recupero el caracter: "<<operaciones.getCharEspecial(binario)<<endl;
+	cout<<endl;
+
+
+	return;
+}
+
+void testProbarLongitudes(){
+
+	string longEnBinario;
+	OperacionesConBitsYBytes operaciones = OperacionesConBitsYBytes();
+
+	cout<<"LONGITUDES EN BINARIO: "<<endl;
+	longEnBinario = operaciones.longitudAbinario(0);
+	cout<<"0: "<<longEnBinario<<endl;
+	cout<<"Valor Recuperado: "<<operaciones.getLongitud(longEnBinario)<<endl;
+
+	longEnBinario = operaciones.longitudAbinario(10);
+	cout<<"10: "<<longEnBinario<<endl;
+	cout<<"Valor Recuperado: "<<operaciones.getLongitud(longEnBinario)<<endl;
+
+	longEnBinario = operaciones.longitudAbinario(55);
+	cout<<"55: "<<longEnBinario<<endl;
+	cout<<"Valor Recuperado: "<<operaciones.getLongitud(longEnBinario)<<endl;
+
+	longEnBinario = operaciones.longitudAbinario(1000);
+	cout<<"1000: "<<longEnBinario<<endl;
+	cout<<"Valor Recuperado: "<<operaciones.getLongitud(longEnBinario)<<endl;
+
+	longEnBinario = operaciones.longitudAbinario(4095);
+	cout<<"4095: "<<longEnBinario<<endl;
+	cout<<"Valor Recuperado: "<<operaciones.getLongitud(longEnBinario)<<endl;
 
 	return;
 }
@@ -71,7 +178,9 @@ int main(int argc, char *argv[]){
 
 	//testProbarVentana();
 	//testTransformarBinarioAChar();
-	testAlmanenarArchivoEnBuffer(argv[2]);
+	//testProbarCaracteresEspeciales();
+	testProbarLongitudes();
+	//testAlmanenarArchivoEnBuffer(argv[2]);
 
 	return 0;
 }

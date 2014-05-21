@@ -20,6 +20,14 @@ typedef unsigned char byte;
 class OperacionesConBitsYBytes{
 
 public:
-	byte binarioAchar(std::string secuencia);
+	byte binarioAchar(string secuencia);
+	byte getCharEspecial(string valorEnBinario);
+	int getLongitud(string unaLongitudEnBinario);
+
+	string charAbinario(byte caracter);
+	string charEspecialAbinario(byte caracter);
+	string longitudAbinario(int unaLongitud);
+	string posicionAbinario(int unaPosicion);
+
 
 };
