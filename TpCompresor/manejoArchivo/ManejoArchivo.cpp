@@ -44,7 +44,7 @@ void ManejoArchivo::leerArchivoByteAByte() {
 
 	char caracter;
 
-	while ((caracter = fgetc(fd_archivo)) == EOF) {
+	while ((caracter = fgetc(fd_archivo)) != EOF) {
 
 		//imprimo byte a byte para mostrar que funciona.
 		cout << caracter << "\n";
