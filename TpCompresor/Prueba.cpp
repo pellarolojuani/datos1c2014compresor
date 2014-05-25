@@ -42,6 +42,7 @@ void testProbarVentana(){
 			cout<<"Elemento: "<<unaVentana->getElementoEnPosicion(j)<<endl;
 
 	unArchivo.cerrarArchivo();
+	delete unaVentana;
 	return;
 }
 

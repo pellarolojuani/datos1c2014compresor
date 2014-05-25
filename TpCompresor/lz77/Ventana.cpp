@@ -12,7 +12,7 @@ using namespace std;
 Ventana::Ventana() {
 
 	elementos = 0;
-	fin = 0;
+	//fin = 0;
 	match = 0;
 	for (int i = 0; i < 4096; i++) ventana[i] = '\0';
 
@@ -20,6 +20,10 @@ Ventana::Ventana() {
 
 Ventana::~Ventana() {/*NADA*/}
 
+
+/*
+ * MIENTRAS QUEDEN ELEMENTOS EN EL ARCHIVO DE TEXTO USO ESTE METODO
+ */
 char Ventana::agregarElemento(char unValor){
 
 	char ultimoChar;
@@ -33,6 +37,23 @@ char Ventana::agregarElemento(char unValor){
 	this->ventana[0] = unValor;
 	this->elementos ++;
 	return ultimoChar;
+}
+
+/*
+ * CUANDO SE LLEGO AL EOF VOY SACANDO LOS ELEMENTOS DE LA VENTANA CON ESTE METODO
+ */
+char Ventana::getUltimoElemento(){
+	/*Saca el ultimo elemento de la ventana y desplaza el resto de los elementos
+	 * Se le asigna valor nulo al primer elemento de la ventana*/
+
+	char ultimoElemento = ventana[4095];
+	for (int i = 4095; i > 0; i--)
+		ventana[i] = ventana[i-1];
+
+	ventana[0] = '\0';
+	this->elementos --;
+
+	return ultimoElemento;
 }
 
 int Ventana::buscarElemento(char unValor){
@@ -49,6 +70,7 @@ int Ventana::buscarElemento(char unValor){
 }
 
 char Ventana::getElementoEnPosicion(int unaPosicion){
+	/*no borra el elemento de la ventana*/
 	return (this->ventana[unaPosicion]);
 }
 

@@ -77,6 +77,20 @@ char ManejoArchivo::agregarCharEnVentana(Ventana* unaVentana){
 	return ultimoCaracter;
 }
 
+void ManejoArchivo::cargaInicialEnVentana(Ventana* unaVentana){
+	/*PRE: El archivo ya tiene que estar abierto
+	 *PRE: La ventana tiene que estar vacia*/
+
+	char caracter;
+
+	for (int i = 0; i < 4096; i++){
+		caracter = fgetc(fd_archivo);
+		unaVentana->agregarElemento(caracter);
+	}
+
+	return;
+}
+
 void ManejoArchivo::leerArchivoYGuardarEnMemoria(){
 
 	byte caracter;
