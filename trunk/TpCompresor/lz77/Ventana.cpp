@@ -60,6 +60,12 @@ int Ventana::getPosicionDeMatch(){
 	return this->match;
 }
 
+void Ventana::inicialzarMatch(){
+	this->match = 0;
+
+	return;
+}
+
 
 
 
