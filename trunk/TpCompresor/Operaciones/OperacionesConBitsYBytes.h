@@ -26,7 +26,8 @@ public:
 
 	string charAbinario(byte caracter);
 	string charEspecialAbinario(byte caracter);
-	string longitudAbinario(int unaLongitud);
+	string longitudAbinario(int unaLongitud); // sirve tambien para
+											  // las posiciones
 	string posicionAbinario(int unaPosicion);
 
 

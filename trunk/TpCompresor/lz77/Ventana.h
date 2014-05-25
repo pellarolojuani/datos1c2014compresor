@@ -17,9 +17,11 @@ class Ventana {
 private:
 	char ventana[4096];
 	int elementos; //indica la cantidad de elementos que tiene la ventana
-	int fin;
+	//int fin;
 	int match; // indica la posicion del primer match. En caso de que no sirva
 			   // busca el siguiente a partir de esta posicion y se modifica.
+
+	void inicialzarMatch();
 
 public:
 	Ventana();
@@ -39,12 +41,10 @@ public:
 	char agregarElemento(char unValor);
 
 	char getElementoEnPosicion(int unaPosicion);
+	char getUltimoElemento();
 	int getCantidadElementos();
 	int getPosicionDeMatch();
 
-private:
-
-	void inicialzarMatch();
 
 };
 
