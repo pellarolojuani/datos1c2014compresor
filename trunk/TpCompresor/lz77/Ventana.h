@@ -21,7 +21,7 @@ private:
 	int match; // indica la posicion del primer match. En caso de que no sirva
 			   // busca el siguiente a partir de esta posicion y se modifica.
 
-	void inicialzarMatch();
+	void inicializarMatch();
 
 public:
 	Ventana();
