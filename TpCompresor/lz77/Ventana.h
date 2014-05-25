@@ -42,6 +42,10 @@ public:
 	int getCantidadElementos();
 	int getPosicionDeMatch();
 
+private:
+
+	void inicialzarMatch();
+
 };
 
 #endif /* VENTANA_H_ */
