@@ -82,7 +82,7 @@ void ManejoArchivo::leerArchivoYGuardarEnMemoria(){
 	byte caracter;
 	//char buffer[1];
 
-	while ((caracter = fgetc(fd_archivo)) == EOF) {
+	while ((caracter = fgetc(fd_archivo)) != EOF) {
 	   // caracter = static_cast<byte>(buffer[0]);
 	    vbuffer.push_back(caracter); //agrego un elemento al final del vector.
 	  }
