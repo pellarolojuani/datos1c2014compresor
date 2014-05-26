@@ -79,7 +79,7 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 		}
 
 // ACA DEBERIAMOS PASAR EL STRING "SALIDA" DE BINARIOS A FILE_OUT EN BITS
-
+// <recordar incluir tamanioArchivo al comienzo>
 
 }
 
