@@ -19,7 +19,7 @@ private:
 public:
 	Lz77();
 	virtual ~Lz77();
-	void compresor();
+	void compresor(string pathEntrada, FILE* file_out);
 	void descompresor();
 };
 
