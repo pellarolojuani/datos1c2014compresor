@@ -13,8 +13,8 @@ using namespace std;
 
 class Lz77 {
 private:
-	Ventana inspeccion;	//aca se va cargando el texto del archivo
-	Ventana memoria; 	//aca se van buscando las repeticiones
+	Ventana* inspeccion;	//aca se va cargando el texto del archivo
+	Ventana* memoria; 	//aca se van buscando las repeticiones
 
 public:
 	Lz77();

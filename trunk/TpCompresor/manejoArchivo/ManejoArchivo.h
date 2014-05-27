@@ -38,7 +38,7 @@ public:
 	/*Este metodo lee el siguiente caracter del archivo y lo guarda en la ventana
 	 * devolviendo el caracter que se encuentra ultimo en la ventana y fue desplazado
 	 * por el nuevo*/
-	char agregarCharEnVentana(Ventana* unaVentana);
+	bool agregarCharEnVentana(Ventana* unaVentana);
 	void cargaInicialEnVentana(Ventana* unaVentana);
 
 	const vector<byte>& getVbuffer() const {

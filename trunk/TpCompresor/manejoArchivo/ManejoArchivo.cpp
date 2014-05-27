@@ -65,16 +65,17 @@ long int ManejoArchivo::contarTerminosDeDocumento(){
 	return cantidad;
 }
 
-char ManejoArchivo::agregarCharEnVentana(Ventana* unaVentana){
+bool ManejoArchivo::agregarCharEnVentana(Ventana* unaVentana){
 	/*PRE: El archivo ya tiene que estar abierto*/
 
 	char caracter;
 	char ultimoCaracter; //para recuperar el caracter que se desplaza de la ventana
 	caracter = fgetc(fd_archivo);
+	if (caracter == EOF) return false;
 
 	ultimoCaracter = unaVentana->agregarElemento(caracter);
 
-	return ultimoCaracter;
+	return true;
 }
 
 void ManejoArchivo::cargaInicialEnVentana(Ventana* unaVentana){
