@@ -179,8 +179,8 @@ int main(int argc, char *argv[]){
 
 	//testProbarVentana();
 	//testTransformarBinarioAChar();
-	//testProbarCaracteresEspeciales();
-	testProbarLongitudes();
+	testProbarCaracteresEspeciales();
+	//testProbarLongitudes();
 	//testAlmanenarArchivoEnBuffer(argv[2]);
 
 	return 0;
