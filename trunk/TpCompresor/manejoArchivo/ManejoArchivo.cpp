@@ -71,11 +71,11 @@ bool ManejoArchivo::agregarCharEnVentana(Ventana* unaVentana){
 	char caracter;
 	char ultimoCaracter; //para recuperar el caracter que se desplaza de la ventana
 	caracter = fgetc(fd_archivo);
-	if (caracter == EOF) return false;
+	if (caracter == EOF) return true;
 
 	ultimoCaracter = unaVentana->agregarElemento(caracter);
 
-	return true;
+	return false;
 }
 
 void ManejoArchivo::cargaInicialEnVentana(Ventana* unaVentana){
