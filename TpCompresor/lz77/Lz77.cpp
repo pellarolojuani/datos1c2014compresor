@@ -37,9 +37,9 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 
 		// llenamos la ventana de inspeccion
 		int i = 0;
-		bool fin = true; //si llega al EOF deja de cargar la ventana (caso de archivos chicos)
-		while (i < 4096 && fin == true){
-			fin = ma.agregarCharEnVentana(inspeccion);
+		bool esFin = false; //si llega al EOF deja de cargar la ventana (caso de archivos chicos)
+		while (i < 4096 && esFin != true){
+			esFin = ma.agregarCharEnVentana(inspeccion);
 			i++;
 		}
 
