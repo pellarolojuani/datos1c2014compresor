@@ -9,6 +9,7 @@
 #include "Constantes.h"
 #include "lz77/Ventana.h"
 #include "Operaciones/OperacionesConBitsYBytes.h"
+#include "Operaciones/OperacionesEntreVentanas.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -204,6 +205,48 @@ void testAlmanenarArchivoEnBuffer(string pathEntrada){
 	unArchivo.cerrarArchivo();
 }
 
+void testBuscarMatchEnVentana(){
+
+	Ventana* inspeccion = new Ventana();
+	Ventana* memoria = new Ventana();
+	ManejoArchivo ma = ManejoArchivo("1984GeorgeOrwell");
+	int* tamanioMatch = new int();
+	*tamanioMatch = 0;
+	int posicionMatch = 4099; //valor random para inicializar. No puede ser un valor posible
+							  //dentro de la ventana para poder comparar si da error
+	OperacionesEntreVentanas operaciones = OperacionesEntreVentanas();
+
+	ma.cargaInicialEnVentana(inspeccion);
+	ma.cerrarArchivo();
+	ma = ManejoArchivo("1984GeorgeOrwell");
+	ma.cargaInicialEnVentana(memoria);
+	ma.cerrarArchivo();
+		//en este punto las dos ventanas tienen exactamente el mismo contenido.
+		//esta prueba tiene que encontrar el match mas largo posible en la posicion 0
+	bool ok = true;
+	for (int i = 0; i < 4096; i++){
+		if (inspeccion->getElementoEnPosicion(i) != memoria->getElementoEnPosicion(i))
+			ok = false;
+	}
+	cout<<endl;
+	if (ok) cout<<"Primera etapa OK: Ventanas cargadas correctamente."<<endl;
+	cout<<endl;
+
+	posicionMatch = operaciones.buscarMaximoMatch(inspeccion, memoria, tamanioMatch);
+
+	cout<<"Posicion Match: "<<posicionMatch<<endl;
+	cout<<"Tamanio Match: "<<*tamanioMatch<<endl;
+
+	if (posicionMatch == 4095 && *tamanioMatch == 4096)
+		cout<<"Prueba OK."<<endl;
+
+	delete memoria;
+	delete inspeccion;
+	delete tamanioMatch;
+
+	return;
+}
+
 int main(int argc, char *argv[]){
 	/*Aca voy habilitando las pruebas que quiera correr*/
 	int i=0;
@@ -214,6 +257,7 @@ int main(int argc, char *argv[]){
 	cout<<"4- testProbarCaracteresEspeciales"<<endl;
 	cout<<"5- testProbarLongitudes"<<endl;
 	cout<<"6- testAlmanenarArchivoEnBuffer"<<endl;
+	cout<<"7- testBuscarMatchEnVentana"<<endl;
 	cin>>i;
 	switch (i){
 		case 1: testProbarVentana();
@@ -228,10 +272,13 @@ int main(int argc, char *argv[]){
 				break;
 		case 6: testAlmanenarArchivoEnBuffer(argv[2]);
 				break;
+		case 7: testBuscarMatchEnVentana();
+				break;
 
 	}
-
+	cout<<endl;
 	cout<<"FIN DE PRUEBAS."<<endl;
+	cout<<endl;
 	return 0;
 }
 
