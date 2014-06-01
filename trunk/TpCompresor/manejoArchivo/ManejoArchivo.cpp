@@ -78,7 +78,7 @@ bool ManejoArchivo::agregarCharEnVentana(Ventana* unaVentana){
 	return false;
 }
 
-void ManejoArchivo::cargaInicialEnVentana(Ventana* unaVentana){
+bool ManejoArchivo::cargaInicialEnVentana(Ventana* unaVentana){
 	/*PRE: El archivo ya tiene que estar abierto
 	 *PRE: La ventana tiene que estar vacia*/
 
@@ -86,10 +86,14 @@ void ManejoArchivo::cargaInicialEnVentana(Ventana* unaVentana){
 
 	for (int i = 0; i < 4096; i++){
 		caracter = fgetc(fd_archivo);
+		if (caracter == EOF){
+			cout<<"Fin de archivo."<<endl;
+			return false;
+		}
 		unaVentana->agregarElemento(caracter);
 	}
 
-	return;
+	return true;
 }
 
 void ManejoArchivo::leerArchivoYGuardarEnMemoria(){

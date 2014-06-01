@@ -46,6 +46,35 @@ void testProbarVentana(){
 	return;
 }
 
+void testCargarArchivoEnVentana(){
+
+	Ventana* unaVentana = new Ventana();
+	ManejoArchivo unArchivo = ManejoArchivo("1984GeorgeOrwell");
+
+	unArchivo.cargaInicialEnVentana(unaVentana);
+
+	for (int i = 0; i < 4096; i++){
+		cout<<i<<": "<<unaVentana->getElementoEnPosicion(i)<<endl;
+	}
+
+	unArchivo.cerrarArchivo();
+	delete unaVentana;
+
+	unaVentana = new Ventana();
+
+	unArchivo = ManejoArchivo("unArchivoDePrueba.txt");
+	if (!unArchivo.cargaInicialEnVentana(unaVentana))
+		cout<<"Prueba OK."<<endl;
+	unArchivo.cerrarArchivo();
+
+	for (int i=0; i < unaVentana->getCantidadElementos(); i++){
+		cout<<i<<": "<<unaVentana->getElementoEnPosicion(i)<<endl;
+	}
+	delete unaVentana;
+
+	return;
+}
+
 void testTransformarBinarioAChar(){
 
 	string unaCadenaBinaria = "01000000"; //64
@@ -162,6 +191,7 @@ void testProbarLongitudes(){
 	return;
 }
 
+
 void testAlmanenarArchivoEnBuffer(string pathEntrada){
 	ManejoArchivo unArchivo = ManejoArchivo(pathEntrada);
 	unArchivo.leerArchivoYGuardarEnMemoria();
@@ -176,13 +206,32 @@ void testAlmanenarArchivoEnBuffer(string pathEntrada){
 
 int main(int argc, char *argv[]){
 	/*Aca voy habilitando las pruebas que quiera correr*/
+	int i=0;
+	cout<<"ELEGIR NUMERO DE PRUEBA: "<<endl;
+	cout<<"1- testProbarVentana"<<endl;
+	cout<<"2- testCargarArchivoEnVentana"<<endl;
+	cout<<"3- testTransformarBinarioAChar"<<endl;
+	cout<<"4- testProbarCaracteresEspeciales"<<endl;
+	cout<<"5- testProbarLongitudes"<<endl;
+	cout<<"6- testAlmanenarArchivoEnBuffer"<<endl;
+	cin>>i;
+	switch (i){
+		case 1: testProbarVentana();
+				break;
+		case 2: testCargarArchivoEnVentana();
+				break;
+		case 3: testTransformarBinarioAChar();
+				break;
+		case 4: testProbarCaracteresEspeciales();
+				break;
+		case 5: testProbarLongitudes();
+				break;
+		case 6: testAlmanenarArchivoEnBuffer(argv[2]);
+				break;
 
-	//testProbarVentana();
-	//testTransformarBinarioAChar();
-	testProbarCaracteresEspeciales();
-	//testProbarLongitudes();
-	//testAlmanenarArchivoEnBuffer(argv[2]);
+	}
 
+	cout<<"FIN DE PRUEBAS."<<endl;
 	return 0;
 }
 
