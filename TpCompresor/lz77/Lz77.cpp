@@ -36,12 +36,7 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 	while (!bandera_EOF){
 
 		// llenamos la ventana de inspeccion
-		int i = 0;
-		bool esFin = false; //si llega al EOF deja de cargar la ventana (caso de archivos chicos)
-		while (i < 4096 && esFin != true){
-			esFin = ma.agregarCharEnVentana(inspeccion);
-			i++;
-		}
+		ma.cargaInicialEnVentana(inspeccion);
 
 		while ( (caracter = inspeccion->getElementoEnPosicion(0)) != EOF){
 			tamanioArchivo++;

@@ -39,7 +39,7 @@ public:
 	 * devolviendo el caracter que se encuentra ultimo en la ventana y fue desplazado
 	 * por el nuevo*/
 	bool agregarCharEnVentana(Ventana* unaVentana);
-	void cargaInicialEnVentana(Ventana* unaVentana);
+	bool cargaInicialEnVentana(Ventana* unaVentana);
 
 	const vector<byte>& getVbuffer() const {
 		return vbuffer;
