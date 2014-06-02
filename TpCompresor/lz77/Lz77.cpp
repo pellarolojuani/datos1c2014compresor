@@ -33,6 +33,13 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 	int longitud = 0;
 	int posicion = 0;
 
+	//---------------------------------------------------------------
+	//Creamos el archivo comprimido con el mismo nombre anteponiendo LZ_
+	string nombreArchivoComprimido = "LZ_";
+	nombreArchivoComprimido += pathEntrada;
+	file_out = fopen(nombreArchivoComprimido.c_str(), "w");
+	//---------------------------------------------------------------
+
 	while (!bandera_EOF){
 
 		// llenamos la ventana de inspeccion

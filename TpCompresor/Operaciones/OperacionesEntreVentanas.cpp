@@ -17,7 +17,7 @@ OperacionesEntreVentanas::OperacionesEntreVentanas() {
 }
 
 int OperacionesEntreVentanas::buscarMaximoMatch(Ventana* inspeccion, Ventana* memoria, int* tamanioMatch){
-	/*busca el maximo match dentro de la ventana de memoria
+	/*busca el maximo match dentro de la ventana de memoria y devuelve la posicion.
 	PRE: La ventana de inspeccion ya tiene que estar cargada*/
 
 	int posInspeccion = 4095; //primera elemento de la ventana de inspeccion a comparar
