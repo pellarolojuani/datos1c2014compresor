@@ -23,6 +23,7 @@ class ManejoArchivo {
 private:
 	FILE* fd_archivo;
 	vector <byte> vbuffer;
+	string nombreArchivo;
 
 public:
 	ManejoArchivo();

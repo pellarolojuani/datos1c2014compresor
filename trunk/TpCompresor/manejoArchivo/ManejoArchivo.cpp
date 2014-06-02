@@ -14,10 +14,12 @@ using namespace std;
 
 ManejoArchivo::ManejoArchivo() {
 	fd_archivo = 0;
+	nombreArchivo = "";
 
 }
 
 ManejoArchivo::ManejoArchivo(string pathEntrada) {
+	this->nombreArchivo = pathEntrada;
 	fd_archivo = fopen(pathEntrada.c_str(), READ);
 	if (fd_archivo == 0)
 		cout << "No se puede abrir el archivo" << "\n";
@@ -69,11 +71,10 @@ bool ManejoArchivo::agregarCharEnVentana(Ventana* unaVentana){
 	/*PRE: El archivo ya tiene que estar abierto*/
 
 	char caracter;
-	char ultimoCaracter; //para recuperar el caracter que se desplaza de la ventana
 	caracter = fgetc(fd_archivo);
 	if (caracter == EOF) return true;
 
-	ultimoCaracter = unaVentana->agregarElemento(caracter);
+	unaVentana->agregarElemento(caracter);
 
 	return false;
 }
