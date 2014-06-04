@@ -29,7 +29,7 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 	string salida = ""; // aca guardariamos la salida previo a pasarla al file_out
 	OperacionesConBitsYBytes operador_bitbyte;
 	bool bandera_EOF = 0; // cuando hayamos leido el EOF debemos ponerla en 1.
-	char caracter;
+	char caracter, caracterSiguiente;
 	int longitud = 0;
 	int posicion = 0;
 
@@ -47,14 +47,24 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 
 		while ( (caracter = inspeccion->getElementoEnPosicion(0)) != EOF){
 			tamanioArchivo++;
-			if ( (posicion = memoria->buscarElemento(caracter)) != -1 ){
+			caracterSiguiente = inspeccion->getElementoEnPosicion(1);
+			if ( ((posicion = memoria->buscarElemento(caracter)) != -1) && (caracterSiguiente == memoria->getElementoEnPosicion(posicion+1)) ){
 				// ESTAMOS EN MATCH
+				longitud = 2;
+				caracterSiguiente = inspeccion->getElementoEnPosicion(longitud);
+
+				// vamos chequeando siguientes caracteres hasta que tengamos un char distinto
+				while ( caracterSiguiente == memoria->getElementoEnPosicion(posicion+longitud) ){
+					longitud++;
+					caracterSiguiente = inspeccion->getElementoEnPosicion(longitud);
+					}
+
+				// concatenamos en salida 'longitud posicion charDistinto'
+				salida += ( operador_bitbyte.longitudAbinario(longitud) );
+				salida += ( operador_bitbyte.longitudAbinario(posicion) );
+				salida += ( operador_bitbyte.charAbinario(caracterSiguiente) );
 				/*
-				   1.en un ciclo while vamos chequeando siguientes caracteres
-				   hasta que tengamos un char distinto
 				   <recordar agregar char leidos en memoria>
-				   2.definimos longitud
-				   3.concatenamos en salida 'longitud posicion charDistinto'
 				   <recordar agregar charDistinto en memoria>
 				   <deberiamos chequear si charDistinto es char especial???>
 				   <deberiamos dejar match nuevamente en cero>
