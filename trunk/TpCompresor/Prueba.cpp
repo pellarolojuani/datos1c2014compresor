@@ -8,6 +8,7 @@
 #include "manejoArchivo/ManejoArchivo.h"
 #include "Constantes.h"
 #include "lz77/Ventana.h"
+#include "lz77/Lz77.h"
 #include "Operaciones/OperacionesConBitsYBytes.h"
 #include "Operaciones/OperacionesEntreVentanas.h"
 #include <iostream>
@@ -247,6 +248,61 @@ void testBuscarMatchEnVentana(){
 	return;
 }
 
+void testbuscarMatchEnVentana2(){
+	Ventana* inspeccion = new Ventana();
+	Ventana* memoria = new Ventana();
+	ManejoArchivo ma = ManejoArchivo("1984GeorgeOrwell");
+	ManejoArchivo ma2 = ManejoArchivo("1984");
+	int* tamanioMatch = new int();
+	*tamanioMatch = 0;
+	int posicionMatch = 4099; //valor random para inicializar. No puede ser un valor posible
+							  //dentro de la ventana para poder comparar si da error
+	OperacionesEntreVentanas operaciones = OperacionesEntreVentanas();
+	ma.cargaInicialEnVentana(inspeccion);
+	ma.cerrarArchivo();
+	ma2.cargaInicialEnVentana(memoria);
+	ma2.cerrarArchivo();
+
+	posicionMatch = operaciones.buscarMaximoMatch(inspeccion, memoria, tamanioMatch);
+
+	cout<<"Posicion Match: "<<posicionMatch<<endl;
+	cout<<"Tamanio Match: "<<*tamanioMatch<<endl;
+
+	delete tamanioMatch;
+
+	return;
+}
+
+void testCompresor(){
+
+	FILE* file_out;
+	Lz77 unLz77 = Lz77();
+	unLz77.compresor("1984GeorgeOrwell", file_out);
+
+
+	return;
+}
+
+void testCrearArchivo(){
+
+	//Creamos el archivo comprimido con el mismo nombre anteponiendo LZ_
+	string nombreArchivoComprimido = "LZ_";
+	nombreArchivoComprimido += "prueba";
+	nombreArchivoComprimido += ".txt";
+
+	FILE* file_out = fopen(nombreArchivoComprimido.c_str(), "w");
+
+	string unTexto = "";
+	unTexto += "texto de prueba";
+	unTexto.push_back('!');
+
+	fputs(unTexto.c_str(), file_out);
+
+	fclose(file_out);
+
+	return;
+}
+
 int main(int argc, char *argv[]){
 	/*Aca voy habilitando las pruebas que quiera correr*/
 	int i=0;
@@ -258,6 +314,9 @@ int main(int argc, char *argv[]){
 	cout<<"5- testProbarLongitudes"<<endl;
 	cout<<"6- testAlmanenarArchivoEnBuffer"<<endl;
 	cout<<"7- testBuscarMatchEnVentana"<<endl;
+	cout<<"8- testCompresor"<<endl;
+	cout<<"9- testbuscarMatchEnVentana2"<<endl;
+	cout<<"10- testCrearArchivo"<<endl;
 	cin>>i;
 	switch (i){
 		case 1: testProbarVentana();
@@ -273,6 +332,12 @@ int main(int argc, char *argv[]){
 		case 6: testAlmanenarArchivoEnBuffer(argv[2]);
 				break;
 		case 7: testBuscarMatchEnVentana();
+				break;
+		case 8: testCompresor();
+				break;
+		case 9: testbuscarMatchEnVentana2();
+				break;
+		case 10: testCrearArchivo();
 				break;
 
 	}

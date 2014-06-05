@@ -72,11 +72,11 @@ bool ManejoArchivo::agregarCharEnVentana(Ventana* unaVentana){
 
 	char caracter;
 	caracter = fgetc(fd_archivo);
-	if (caracter == EOF) return true;
+	if (caracter == EOF) return false;
 
 	unaVentana->agregarElemento(caracter);
 
-	return false;
+	return true;
 }
 
 bool ManejoArchivo::cargaInicialEnVentana(Ventana* unaVentana){
