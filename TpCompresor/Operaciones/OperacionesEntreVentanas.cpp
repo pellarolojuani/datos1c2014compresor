@@ -19,7 +19,7 @@ OperacionesEntreVentanas::OperacionesEntreVentanas() {
 int OperacionesEntreVentanas::buscarMaximoMatch(Ventana* inspeccion, Ventana* memoria, int* tamanioMatch){
 	/*busca el maximo match dentro de la ventana de memoria y devuelve la posicion.
 	PRE: La ventana de inspeccion ya tiene que estar cargada*/
-
+	*tamanioMatch = 0;
 	int posInspeccion = 4095; //primera elemento de la ventana de inspeccion a comparar
 	int posMaximoMatch = -1;
 	int unMatch; //para ir sumando y comparando con el maximo match
@@ -37,7 +37,6 @@ int OperacionesEntreVentanas::buscarMaximoMatch(Ventana* inspeccion, Ventana* me
 			unMatch ++;
 			posInspeccion --;
 			int aux = posicionAux -1;
-
 			//a partir de ahora cuenta cuantos caracteres hay de match
 			while ((inspeccion->getElementoEnPosicion(posInspeccion) == memoria->getElementoEnPosicion(aux))
 					&& (posInspeccion >= 0 && aux >= 0)){
@@ -45,7 +44,7 @@ int OperacionesEntreVentanas::buscarMaximoMatch(Ventana* inspeccion, Ventana* me
 				posInspeccion --;
 				aux --;
 			}
-			if (unMatch > *tamanioMatch){
+			if (unMatch > *tamanioMatch && unMatch > 2){
 				*tamanioMatch = unMatch;
 				posMaximoMatch = posicionAux;
 			}
