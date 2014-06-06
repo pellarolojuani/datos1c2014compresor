@@ -76,7 +76,7 @@ string OperacionesConBitsYBytes::longitudAbinario(int unaLongitud){
 	}
 	else{
 	  for (int i = unaLongitud; i > 1; i/=2) {
-	    byte nResto = i%2;
+	    char nResto = i%2;
 	    if (nResto == 0) {
 	    	sBuffer.push_back('0');
 	    } else {
@@ -86,7 +86,7 @@ string OperacionesConBitsYBytes::longitudAbinario(int unaLongitud){
 	sBuffer.push_back('1');
 
 	int longitud = static_cast<int>(sBuffer.size());
-	for (int i = 0; i < (12 - longitud); i++ ) unBinario.push_back('0');
+	for (int i = 0; i < (11 - longitud); i++ ) unBinario.push_back('0');
 	for(int i = longitud - 1; i >= 0; i-- ) unBinario.push_back(sBuffer[i]);
 
 

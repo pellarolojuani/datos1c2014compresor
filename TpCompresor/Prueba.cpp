@@ -55,9 +55,10 @@ void testCargarArchivoEnVentana(){
 
 	unArchivo.cargaInicialEnVentana(unaVentana);
 
-	for (int i = 0; i < 4096; i++){
+	for (int i = 0; i < 2048; i++){
 		cout<<i<<": "<<unaVentana->getElementoEnPosicion(i)<<endl;
 	}
+	cout<<"-----------------------------------------------------"<<endl;
 
 	unArchivo.cerrarArchivo();
 	delete unaVentana;
@@ -66,12 +67,14 @@ void testCargarArchivoEnVentana(){
 
 	unArchivo = ManejoArchivo("unArchivoDePrueba.txt");
 	if (!unArchivo.cargaInicialEnVentana(unaVentana))
-		cout<<"Prueba OK."<<endl;
+		cout<<"ERROR EN LA PRUEBA."<<endl;
 	unArchivo.cerrarArchivo();
+
 
 	for (int i=0; i < unaVentana->getCantidadElementos(); i++){
 		cout<<i<<": "<<unaVentana->getElementoEnPosicion(i)<<endl;
 	}
+
 	delete unaVentana;
 
 	return;
@@ -187,7 +190,7 @@ void testProbarLongitudes(){
 	cout<<"Valor Recuperado: "<<operaciones.getLongitud(longEnBinario)<<endl;
 
 	longEnBinario = operaciones.longitudAbinario(4095);
-	cout<<"4095: "<<longEnBinario<<endl;
+	cout<<"2048: "<<longEnBinario<<endl;
 	cout<<"Valor Recuperado: "<<operaciones.getLongitud(longEnBinario)<<endl;
 
 	return;
@@ -288,7 +291,7 @@ void testCrearArchivo(){
 	//Creamos el archivo comprimido con el mismo nombre anteponiendo LZ_
 	string nombreArchivoComprimido = "LZ_";
 	nombreArchivoComprimido += "prueba";
-	nombreArchivoComprimido += ".txt";
+
 
 	FILE* file_out = fopen(nombreArchivoComprimido.c_str(), "w");
 
@@ -297,6 +300,9 @@ void testCrearArchivo(){
 	unTexto.push_back('!');
 
 	fputs(unTexto.c_str(), file_out);
+	fputc('A', file_out);
+	fputc('A', file_out);
+	fputc('A', file_out);
 
 	fclose(file_out);
 
@@ -313,9 +319,9 @@ int main(int argc, char *argv[]){
 	cout<<"4- testProbarCaracteresEspeciales"<<endl;
 	cout<<"5- testProbarLongitudes"<<endl;
 	cout<<"6- testAlmanenarArchivoEnBuffer"<<endl;
-	cout<<"7- testBuscarMatchEnVentana"<<endl;
+	cout<<"7- testBuscarMatchEnVentana (MOMENTANEAMENTE SUSPENDIDO)"<<endl;
 	cout<<"8- testCompresor"<<endl;
-	cout<<"9- testbuscarMatchEnVentana2"<<endl;
+	cout<<"9- testbuscarMatchEnVentana2 (MOMENTANEAMENTE SUSPENDIDO)"<<endl;
 	cout<<"10- testCrearArchivo"<<endl;
 	cin>>i;
 	switch (i){

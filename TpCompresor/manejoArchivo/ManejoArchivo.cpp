@@ -85,13 +85,20 @@ bool ManejoArchivo::cargaInicialEnVentana(Ventana* unaVentana){
 
 	char caracter;
 
-	for (int i = 0; i < 4096; i++){
-		caracter = fgetc(fd_archivo);
-		if (caracter == EOF){
-			cout<<"Fin de archivo."<<endl;
-			return false;
+	//caso de archivo menor al tamaño de la ventana
+	int cant = this->contarTerminosDeDocumento();
+	if (cant < 2048){
+		for (int j = 0; j < cant; j++){
+			caracter = fgetc(fd_archivo);
+			unaVentana->agregarElemento(caracter);
 		}
-		unaVentana->agregarElemento(caracter);
+	}
+	//caso de archivo mayor al tamaño de la ventana
+	else{
+		for (int i = 0; i < 2048 ; i++){
+			caracter = fgetc(fd_archivo);
+			unaVentana->agregarElemento(caracter);
+		}
 	}
 
 	return true;
