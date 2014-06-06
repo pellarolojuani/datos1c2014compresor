@@ -9,15 +9,16 @@
 #define VENTANA_H_
 #include <iostream>
 #include <string>
+#include <deque>
 
 using namespace std;
 
 class Ventana {
 
 private:
-	char ventana[4096];
+	deque<char> ventana;
 	int elementos; //indica la cantidad de elementos que tiene la ventana
-	//int fin;
+
 	int match; // indica la posicion del primer match. En caso de que no sirva
 			   // busca el siguiente a partir de esta posicion y se modifica.
 

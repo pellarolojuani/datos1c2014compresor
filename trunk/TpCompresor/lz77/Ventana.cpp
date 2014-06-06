@@ -14,7 +14,7 @@ Ventana::Ventana() {
 	elementos = 0;
 	//fin = 0;
 	match = 0;
-	for (int i = 0; i < 4096; i++) ventana[i] = '\0';
+	this->ventana = deque<char>();
 
 }
 
@@ -26,17 +26,16 @@ Ventana::~Ventana() {/*NADA*/}
  */
 char Ventana::agregarElemento(char unValor){
 
-	char ultimoChar;
-	if (elementos != 0){
-		/*Desplazo todos los elementos de la ventana*/
-		for (int i = 4095; i > 0; i--){
-			ultimoChar = ventana[i];
-			ventana[i] = ventana[i-1];
-		}
+	char ultimoElemento;
+	if (elementos == 2048){
+		ventana.push_front(unValor);
+		ultimoElemento = ventana.back();
+		ventana.pop_back();
+		return ultimoElemento;
 	}
-	this->ventana[0] = unValor;
-	this->elementos ++;
-	return ultimoChar;
+	ventana.push_front(unValor);
+	elementos ++;
+	return '\0';
 }
 
 /*
@@ -46,21 +45,19 @@ char Ventana::getUltimoElemento(){
 	/*Saca el ultimo elemento de la ventana y desplaza el resto de los elementos
 	 * Se le asigna valor nulo al primer elemento de la ventana*/
 
-	char ultimoElemento = ventana[4095];
-	for (int i = 4095; i > 0; i--)
-		ventana[i] = ventana[i-1];
+	if (elementos == 0) return '\0';
 
-	ventana[0] = '\0';
-	this->elementos --;
-
+	char ultimoElemento = ventana.back();
+	ventana.pop_back();
+	elementos--;
 	return ultimoElemento;
 }
 
 int Ventana::buscarElemento(char unValor){
 
 	int posicion = -1;
-	for (int i = match; i < 4096; i++ ){
-		if (ventana[i] == unValor){
+	for (int i = match; i < elementos-1; i++ ){
+		if (ventana.at(i) == unValor){
 			match = i;
 			posicion = match;
 		}
@@ -71,7 +68,7 @@ int Ventana::buscarElemento(char unValor){
 
 char Ventana::getElementoEnPosicion(int unaPosicion){
 	/*no borra el elemento de la ventana*/
-	return (this->ventana[unaPosicion]);
+	return (this->ventana.at(unaPosicion));
 }
 
 int Ventana::getCantidadElementos(){

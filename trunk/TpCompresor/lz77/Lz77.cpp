@@ -45,11 +45,15 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 
 	file_out = fopen(nombreArchivoComprimido.c_str(), "w");
 	//---------------------------------------------------------------
-
+	cout<<"COMIENZA A CORRER EL COMPRESOR"<<endl;
+	cout<<"Se carga la ventana"<<endl;
 	ma.cargaInicialEnVentana(inspeccion);
-	while (inspeccion->getCantidadElementos() != 0){
+	int cant;
+	cout<<"    ...Se procesa cada uno de los caracteres del texto..."<<endl;
+	while ((cant = inspeccion->getCantidadElementos()) != 0){
 		posicion = operador_ventanas.buscarMaximoMatch(this->inspeccion, this->memoria, tamanioMatch);
 		if (posicion != -1) { //Hay Match!!
+			cout<<"SI ENTRA ACA EN ALGUN MOMENTO ESTA MAL!!!"<<endl;
 					for (int i = 0; i < *tamanioMatch; i++){
 						//agrego todos los elementos que hacen match en memoria
 						int nada; cin>>nada;
@@ -88,8 +92,8 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 			}
 
 		}//FIN DEL CASO EN QUE NO HAY MATCH
-
 	}
+	cout<<"se agregan los bits de relleno al archivo comprimido"<<endl;
 	/*----------Relleno-----------*/
 	int resto = strlen(salida.c_str()) % 8;
 	salida += "1";
@@ -97,81 +101,24 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 		salida += "0";
 	}
 	/*----------------------------*/
-
 	string ochoBits = "";
-	string unChar;
+	char unChar;
 	int i = 0;
+	cout<<"..se comienza a grabar el archivo comprimido en disco.."<<endl;
 	while (i < strlen(salida.c_str())){
 		for (int k = 0; k < 8; k++){
 			ochoBits += salida[i];
 			i++;
 		}
 		unChar = operador_bitbyte.binarioAchar(ochoBits);
-
+		fputc(unChar, file_out);
+		ochoBits = "";
 	}
-	fputs(unChar.c_str(), file_out);
 
 	fclose(file_out);
 	delete tamanioMatch;
 
 }
-
-	//while (!bandera_EOF){
-
-		// llenamos la ventana de inspeccion
-
-		/*while ( (caracter = inspeccion->getElementoEnPosicion(4095)) != EOF){ //OJO VER LA CONDICION!!
-			tamanioArchivo++;
-			caracterSiguiente = inspeccion->getElementoEnPosicion(1);
-			if ( ((posicion = memoria->buscarElemento(caracter)) != -1) && (caracterSiguiente == memoria->getElementoEnPosicion(posicion+1)) ){
-				// ESTAMOS EN MATCH
-				longitud = 2;
-				caracterSiguiente = inspeccion->getElementoEnPosicion(longitud);
-
-				// vamos chequeando siguientes caracteres hasta que tengamos un char distinto
-				while ( caracterSiguiente == memoria->getElementoEnPosicion(posicion+longitud) ){
-					longitud++;
-					caracterSiguiente = inspeccion->getElementoEnPosicion(longitud);
-					}
-
-				// concatenamos en salida 'longitud posicion charDistinto'
-				salida += ( operador_bitbyte.longitudAbinario(longitud) );
-				salida += ( operador_bitbyte.longitudAbinario(posicion) );
-				salida += ( operador_bitbyte.charAbinario(caracterSiguiente) );*/
-				/*
-				   <recordar agregar char leidos en memoria>
-				   <recordar agregar charDistinto en memoria>
-				   <deberiamos chequear si charDistinto es char especial???>
-				   <deberiamos dejar match nuevamente en cero>
-				*/
-				//longitud = 0;
-				/*} // fin match
-			    else {
-			    	// ESTAMOS EN LITERAL
-					if ( (caracter=='a') || (caracter=='e') || (caracter=='i') || (caracter=='o') || (caracter=='u') || (caracter=='t') || (caracter=='\n') || (caracter==' ') ){
-						// ESTAMOS EN LITERAL ESPECIAL
-						salida += "00";
-						salida += ( operador_bitbyte.charEspecialAbinario(caracter) );
-						} // fin literal especial
-						else {
-							// ESTAMOS EN LITERAL NO ESPECIAL
-							salida += "01";
-							salida += ( operador_bitbyte.charAbinario(caracter) );
-							} // fin literal no especial
-
-					memoria->agregarElemento(caracter);
-					} // fin literales
-
-			posicion = 0; // dejamos nuevamente en cero la variable antes de leer prox char
-			}
-
-		// llegamos aca cuando caracter = EOF
-		bandera_EOF = 1;
-		}*/
-
-// ACA DEBERIAMOS PASAR EL STRING "SALIDA" DE BINARIOS A FILE_OUT EN BITS
-// <recordar incluir tamanioArchivo al comienzo>
-
 
 
 void Lz77::descompresor() {
