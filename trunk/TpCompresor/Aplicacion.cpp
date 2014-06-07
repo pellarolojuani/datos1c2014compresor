@@ -16,20 +16,45 @@
 
 using namespace std;
 
-string parametro;
+string parametro = "";
+string pathArchivo = "";
+string nombreArchivo = "";
+
 bool errorParam = false;
 
-/*int main(int argc, char * argv[]) {
+void comprimirArchivo(){
+	//FILE* file_out;
+//	Lz77 unLz77 = Lz77();
+//	unLz77.compresor(pathArchivo, file_out);
+}
+
+void descomprimirArchivo(){
+	//Lz77 unLz77 = Lz77();
+	//unLz77.descompresor(nombreArchivo);
+}
+
+void obtenerNombreDeArchivo(){
+	int posBarra = pathArchivo.rfind("/");
+	if(posBarra != -1){
+		nombreArchivo = "LZ_" + pathArchivo.substr(posBarra+1);
+
+	}else{
+		nombreArchivo = "LZ_" + pathArchivo;
+	}
+	cout << nombreArchivo << "\n";
+}
+
+/*
+int main(int argc, char * argv[]) {
 
 
 	 // para ejecutarlo, una vez creado el ejecutable
 	 // ./<nombre del ejecutable> -<c o d> <directorio archivo>
 	 // si quiero descomprimir -d, si quiero comprimir -c
 
-
-
 	if (argc > 1) {
 		parametro = argv[1];
+		pathArchivo = argv[2];
 		cout << PARM_INGRESADO + parametro << "\n";
 	} else {
 		cout << INGRESAR_PARAM << "\n";
@@ -37,19 +62,17 @@ bool errorParam = false;
 	}
 
 	if (parametro.compare("-c") == 0 && !errorParam) {
-		cout << COMPRIMIR << "\n";
+		cout << COMPRIMIR<< "\n";
+	//	comprimirArchivo();
 	} else if (parametro.compare("-d") == 0 && !errorParam) {
 		cout << DESCOMPRIMIR << "\n";
+	//	descomprimirArchivo();
 	} else {
 		cout << OP_INCORRECTA << "\n";
 	};
-
-	Ventana unaVentana = Ventana();
-	Lz77 lz77 = Lz77();
-	//esto es un ejemplo que abre un archivo y lo lee byte a byte.
-	ManejoArchivo ma = ManejoArchivo(argv[2]);
-	ma.leerArchivoByteAByte();
-	ma.cerrarArchivo();
+	obtenerNombreDeArchivo();
 
 	return 0;
 }*/
+
+
