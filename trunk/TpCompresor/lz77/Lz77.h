@@ -20,7 +20,7 @@ public:
 	Lz77();
 	virtual ~Lz77();
 	void compresor(string pathEntrada, FILE* file_out);
-	void descompresor();
+	void descompresor(string pathEntrada);
 };
 
 #endif /* LZ77_H_ */
