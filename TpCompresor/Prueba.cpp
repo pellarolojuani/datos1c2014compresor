@@ -280,10 +280,16 @@ void testCompresor(){
 
 	FILE* file_out;
 	Lz77 unLz77 = Lz77();
-	unLz77.compresor("1984GeorgeOrwell", file_out);
+	unLz77.compresor("Entrada1.txt", file_out);
 
 
 	return;
+}
+
+void testDescompresor(){
+
+	Lz77 unLz77 = Lz77();
+	unLz77.descompresor("LZ_Entrada1.txt");
 }
 
 void testCrearArchivo(){
@@ -323,6 +329,7 @@ int main(int argc, char *argv[]){
 	cout<<"8- testCompresor"<<endl;
 	cout<<"9- testbuscarMatchEnVentana2 (MOMENTANEAMENTE SUSPENDIDO)"<<endl;
 	cout<<"10- testCrearArchivo"<<endl;
+	cout<<"11- testDescompresor"<<endl;
 	cin>>i;
 	switch (i){
 		case 1: testProbarVentana();
@@ -344,6 +351,8 @@ int main(int argc, char *argv[]){
 		case 9: testbuscarMatchEnVentana2();
 				break;
 		case 10: testCrearArchivo();
+				break;
+		case 11: testDescompresor();
 				break;
 
 	}
