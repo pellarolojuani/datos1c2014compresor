@@ -133,6 +133,9 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 	}
 
 	fclose(file_out);
+	//cierro el archivo de entrada y lo elimino.
+	ma.cerrarArchivo();
+	ma.eliminarArchivo();
 	delete tamanioMatch;
 
 }
@@ -161,6 +164,8 @@ void Lz77::descompresor(string pathEntrada) {
 	ManejoArchivo ma = ManejoArchivo(pathEntrada);
 	long int cantidadElementos = ma.contarTerminosDeDocumento();
 	ma.cerrarArchivo();
+	//elimina el archivo de entrada.
+	ma.eliminarArchivo();
 
 	/*chequeamos que el tipo de archivo se recibe para descomprimir sea el correcto*/
 	string inicio = "";
@@ -233,8 +238,6 @@ void Lz77::descompresor(string pathEntrada) {
 			//caso MATCH
 		}
 	}
-
 	fclose(fd_archivoDescomprimido);
-
 }
 
