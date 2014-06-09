@@ -159,8 +159,8 @@
 
 #define PARM_INGRESADO "Parámetro ingresado: "
 #define INGRESAR_PARAM "Debe ingresar el parámetro"
-#define COMPRIMIR "Hay que comprimir"
-#define DESCOMPRIMIR "Hay que descomprimir"
+#define COMPRIMIR "Vamos a comprimir el archivo."
+#define DESCOMPRIMIR "Vamos a descomprimir el archivo."
 #define OP_INCORRECTA "Opción incorrecta"
 
 #endif /* CONSTANTES_H_ */
