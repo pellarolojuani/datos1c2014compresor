@@ -15,6 +15,7 @@ using namespace std;
 ManejoArchivo::ManejoArchivo() {
 	fd_archivo = 0;
 	nombreArchivo = "";
+	nombreDeArchivoSinBarra = "";
 
 }
 
@@ -114,5 +115,25 @@ void ManejoArchivo::leerArchivoYGuardarEnMemoria(){
 	    vbuffer.push_back(caracter); //agrego un elemento al final del vector.
 	  }
 
+}
+
+void ManejoArchivo::obtenerNombreDeArchivoSinBarras(){
+
+	int posBarra = nombreArchivo.rfind("/");
+	if(posBarra != -1){
+		nombreDeArchivoSinBarra = nombreArchivo.substr(posBarra+1);
+	}else{
+		nombreDeArchivoSinBarra = nombreArchivo;
+	}
+	cout << nombreArchivo << "\n";
+
+}
+
+void ManejoArchivo::eliminarArchivo(){
+	if(remove(nombreArchivo.c_str()) == -1){
+		cout << "No se puedo eliminar el archivo de entrada." << "\n";
+	}else{
+		cout << "El archivo de entrada ha sido eliminado." << "\n";
+	}
 }
 

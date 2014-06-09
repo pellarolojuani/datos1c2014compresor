@@ -24,6 +24,7 @@ private:
 	FILE* fd_archivo;
 	vector <byte> vbuffer;
 	string nombreArchivo;
+	string nombreDeArchivoSinBarra;
 
 public:
 	ManejoArchivo();
@@ -35,6 +36,8 @@ public:
 	void abrirArchivo(std::string pathEntrada);
 	void cerrarArchivo();
 	long int contarTerminosDeDocumento();
+	void obtenerNombreDeArchivoSinBarras();
+	void eliminarArchivo();
 
 	/*Este metodo lee el siguiente caracter del archivo y lo guarda en la ventana
 	 * devolviendo el caracter que se encuentra ultimo en la ventana y fue desplazado
@@ -48,6 +51,14 @@ public:
 
 	void setVbuffer(const vector<byte>& vbuffer) {
 		this->vbuffer = vbuffer;
+	}
+
+	const string& getNombreDeArchivoSinBarra() const {
+		return nombreDeArchivoSinBarra;
+	}
+
+	void setNombreDeArchivoSinBarra(const string& nombreDeArchivoSinBarra) {
+		this->nombreDeArchivoSinBarra = nombreDeArchivoSinBarra;
 	}
 };
 
