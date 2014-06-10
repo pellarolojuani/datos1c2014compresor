@@ -19,14 +19,14 @@ OperacionesEntreVentanas::OperacionesEntreVentanas() {
 int OperacionesEntreVentanas::buscarMaximoMatch(Ventana* inspeccion, Ventana* memoria, int* tamanioMatch){
 	/*busca el maximo match dentro de la ventana de memoria y devuelve la posicion.
 	PRE: La ventana de inspeccion ya tiene que estar cargada*/
-	/**tamanioMatch = 0;
-	int posInspeccion = 4095; //primera elemento de la ventana de inspeccion a comparar
+	*tamanioMatch = 0;
+	int posInspeccion = 2047; //primera elemento de la ventana de inspeccion a comparar
 	int posMaximoMatch = -1;
 	int unMatch; //para ir sumando y comparando con el maximo match
 
 	memoria->inicializarMatch(); //para comenzar buscando desde el principio de la ventana
 
-	int posicionAux = 4099; //aca vamos almacenando la posicion de cada match que va encontrando.
+	int posicionAux = 2050; //aca vamos almacenando la posicion de cada match que va encontrando.
 							//se inicializa con un valor que no existe en la ventana
 	while (posicionAux != -1){
 		char caracter = inspeccion->getElementoEnPosicion(posInspeccion);
@@ -37,12 +37,24 @@ int OperacionesEntreVentanas::buscarMaximoMatch(Ventana* inspeccion, Ventana* me
 			unMatch ++;
 			posInspeccion --;
 			int aux = posicionAux -1;
+
+			//el siguiente if se aplica cuando se encontro el elemento en la posicion 0 de memoria
+			if ( aux < 0 ){
+				memoria = inspeccion;
+				aux = 2047;
+			}
 			//a partir de ahora cuenta cuantos caracteres hay de match
 			while ((inspeccion->getElementoEnPosicion(posInspeccion) == memoria->getElementoEnPosicion(aux))
-					&& (posInspeccion >= 0 && aux >= 0)){
+					&& (posInspeccion >= 0)){
 				unMatch ++;
 				posInspeccion --;
 				aux --;
+
+				//el siguiente if se aplica cuando se encontro el elemento en la posicion 0 de memoria
+				if ( aux < 0 ){
+					memoria = inspeccion;
+					aux = 2047;
+				}
 			}
 			if (unMatch > *tamanioMatch && unMatch > 2){
 				*tamanioMatch = unMatch;
@@ -51,8 +63,7 @@ int OperacionesEntreVentanas::buscarMaximoMatch(Ventana* inspeccion, Ventana* me
 
 		}
 
-	}*/
-	return -1;
-	//return posMaximoMatch;
+	}
+	return posMaximoMatch;
 }
 
