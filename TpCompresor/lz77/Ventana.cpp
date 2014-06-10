@@ -13,7 +13,7 @@ Ventana::Ventana() {
 
 	elementos = 0;
 	//fin = 0;
-	match = 0;
+	match = elementos+1;
 	this->ventana = deque<char>();
 
 }
@@ -56,10 +56,11 @@ char Ventana::getUltimoElemento(){
 int Ventana::buscarElemento(char unValor){
 
 	int posicion = -1;
-	for (int i = match; i < elementos-1; i++ ){
+	for (int i = match-1; i >= 0; i-- ){
 		if (ventana.at(i) == unValor){
 			match = i;
 			posicion = match;
+			return posicion;
 		}
 	}
 
@@ -80,7 +81,7 @@ int Ventana::getPosicionDeMatch(){
 }
 
 void Ventana::inicializarMatch(){
-	this->match = 0;
+	this->match = -1;
 
 	return;
 }
