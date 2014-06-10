@@ -49,15 +49,14 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 
 	file_out = fopen(nombreArchivoComprimido.c_str(), "w");
 	//---------------------------------------------------------------
-	cout<<"COMIENZA A CORRER EL COMPRESOR"<<endl;
-	cout<<"Se carga la ventana"<<endl;
+
 	ma.cargaInicialEnVentana(inspeccion);
 	int cant;
-	cout<<"    ...Se procesa cada uno de los caracteres del texto..."<<endl;
+
 	while ((cant = inspeccion->getCantidadElementos()) != 0){
 		posicion = operador_ventanas.buscarMaximoMatch(this->inspeccion, this->memoria, tamanioMatch);
 		if (posicion != -1) { //Hay Match!!
-			cout<<"SI ENTRA ACA EN ALGUN MOMENTO ESTA MAL!!!"<<endl;
+
 				for (int i = 0; i < *tamanioMatch; i++){
 					//agrego todos los elementos que hacen match en memoria
 					int nada; cin>>nada;
@@ -108,7 +107,7 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 			//ochoBits = "";
 		//}
 	}
-	cout<<"se agregan los bits de relleno al archivo comprimido"<<endl;
+
 	/*----------Relleno-----------*/
 	int resto = strlen(salida.c_str()) % 8;
 	salida += "1";
@@ -117,11 +116,8 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 	}
 	/*----------------------------*/
 
-
-
-	cout<<"..se comienza a grabar el archivo comprimido en disco.."<<endl;
-
-	while (i < strlen(salida.c_str())){
+	long int cantidad = salida.size();
+	while (i < cantidad){
 		string ochoBits = "";
 		for (int k = 0; k < 8; k++){
 			ochoBits += salida[i];
@@ -135,7 +131,7 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 	fclose(file_out);
 	//cierro el archivo de entrada y lo elimino.
 	ma.cerrarArchivo();
-	ma.eliminarArchivo();
+	//ma.eliminarArchivo();
 	delete tamanioMatch;
 
 }
@@ -156,7 +152,6 @@ void Lz77::descompresor(string pathEntrada) {
 	string nombre = "";
 	for (int a = 3; a < pathEntrada.size(); a++) nombre += pathEntrada.at(a);
 	FILE* fd_archivoDescomprimido = fopen(nombre.c_str(), "w");
-	cout<<"Se crea el archivo original en blanco para ser completado"<<endl;
 
 	Ventana unaVentana = Ventana();
 	OperacionesConBitsYBytes operador_bitbyte;
@@ -165,7 +160,7 @@ void Lz77::descompresor(string pathEntrada) {
 	long int cantidadElementos = ma.contarTerminosDeDocumento();
 	ma.cerrarArchivo();
 	//elimina el archivo de entrada.
-	ma.eliminarArchivo();
+	//ma.eliminarArchivo();
 
 	/*chequeamos que el tipo de archivo se recibe para descomprimir sea el correcto*/
 	string inicio = "";
@@ -177,7 +172,6 @@ void Lz77::descompresor(string pathEntrada) {
 		return;
 	}
 	/*--------------------Fin de chequeo de archivo correcto----------------------*/
-	cout<<"Se chequeo el formato del archivo a descomprimir. OK"<<endl;
 
 	for(long int i = 0; i < cantidadElementos; i++){
 		//pasamos todo el archivo a binario para procesarlo
@@ -185,7 +179,6 @@ void Lz77::descompresor(string pathEntrada) {
 		aux	 += operador_bitbyte.charAbinario(unChar);
 	}
 	fclose(fd_archivoComrimido);
-	cout<<"Se levanto todo el archivo en binario a memoria. OK"<<endl;
 
 	/*Descartamos el relleno del archivo en binario*/
 	int relleno = 0;
@@ -199,7 +192,6 @@ void Lz77::descompresor(string pathEntrada) {
 		entrada += aux.at(j);
 	}
 	/*------Completado el descarte de bits de relleno---------*/
-	cout<<"Se sacan los bits de relleno del archivo en binario. OK"<<endl;
 
 	/*Comenzamos a leer el archivo binario*/
 	cout<<"SIZE: "<<entrada.size()<<endl;
