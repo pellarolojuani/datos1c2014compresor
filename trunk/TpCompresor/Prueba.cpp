@@ -280,7 +280,7 @@ void testCompresor(){
 
 	FILE* file_out;
 	Lz77 unLz77 = Lz77();
-	unLz77.compresor("Entrada1.txt", file_out);
+	unLz77.compresor("Harry Potter and the Order of the Phoenix", file_out);
 
 
 	return;
@@ -289,7 +289,7 @@ void testCompresor(){
 void testDescompresor(){
 
 	Lz77 unLz77 = Lz77();
-	unLz77.descompresor("LZ_Entrada1.txt");
+	unLz77.descompresor("LZ_Harry Potter and the Order of the Phoenix");
 }
 
 void testCrearArchivo(){
@@ -314,9 +314,9 @@ void testCrearArchivo(){
 
 	return;
 }
-
+/*
 int main(int argc, char *argv[]){
-	/*Aca voy habilitando las pruebas que quiera correr*/
+	//Aca voy habilitando las pruebas que quiera correr
 	int i=0;
 	cout<<"ELEGIR NUMERO DE PRUEBA: "<<endl;
 	cout<<"1- testProbarVentana"<<endl;
@@ -362,4 +362,4 @@ int main(int argc, char *argv[]){
 	cout<<endl;
 	return 0;
 }
-
+*/

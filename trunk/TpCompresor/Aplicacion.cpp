@@ -33,7 +33,7 @@ void descomprimirArchivo(){
 	unLz77.descompresor(pathArchivo);
 }
 
-/*
+
 int main(int argc, char * argv[]) {
 
 
@@ -62,6 +62,6 @@ int main(int argc, char * argv[]) {
 	};
 
 	return 0;
-}*/
+}
 
 
