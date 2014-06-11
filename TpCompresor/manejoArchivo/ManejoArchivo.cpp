@@ -93,9 +93,6 @@ bool ManejoArchivo::cargaInicialEnVentana(Ventana* unaVentana){
 			caracter = fgetc(fd_archivo);
 			unaVentana->agregarElemento(caracter);
 		}
-		for (int j = cant; j < 2048; j++){
-			unaVentana->agregarElemento('');
-		}
 	}
 	//caso de archivo mayor al tamaño de la ventana
 	else{
