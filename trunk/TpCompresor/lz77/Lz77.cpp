@@ -44,8 +44,9 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 
 	//---------------------------------------------------------------
 	//Creamos el archivo comprimido con el mismo nombre anteponiendo LZ_
-	string nombreArchivoComprimido = "LZ_";
+	string nombreArchivoComprimido = "";
 	nombreArchivoComprimido += pathEntrada;
+	nombreArchivoComprimido += ".10";
 
 	file_out = fopen(nombreArchivoComprimido.c_str(), "w");
 	//---------------------------------------------------------------
@@ -59,7 +60,7 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 
 				for (int i = 0; i < *tamanioMatch; i++){
 					//agrego todos los elementos que hacen match en memoria
-					int nada; cin>>nada;
+					caracter = this->inspeccion->getUltimoElemento();
 					ma.agregarCharEnVentana(this->inspeccion);
 					this->memoria->agregarElemento(caracter);
 				}
@@ -76,6 +77,9 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 		else{
 			/*No hay match*/
 			caracter = this->inspeccion->getUltimoElemento();
+
+			//cout<<caracter;
+
 			ma.agregarCharEnVentana(this->inspeccion);
 			this->memoria->agregarElemento(caracter);
 
@@ -94,18 +98,7 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 				salida += operador_bitbyte.charAbinario(caracter);
 			}
 
-		}//FIN DEL CASO EN QUE NO HAY MATCH
-
-		//if (salida.size() > 8){ //si hay mas de 8 bits se van guardando en disco
-			//string ochoBits = "";
-			//for (int k = 0; k < 8; k++){
-				//ochoBits += salida[i];
-				//i++;
-			//}
-			//unChar = operador_bitbyte.binarioAchar(ochoBits);
-			//fputc(unChar, file_out);
-			//ochoBits = "";
-		//}
+		}
 	}
 
 	/*----------Relleno-----------*/
@@ -148,9 +141,21 @@ void Lz77::descompresor(string pathEntrada) {
 
 	FILE* fd_archivoComrimido = fopen(pathEntrada.c_str(), "r");
 
+
+	/*chequeamos que el tipo de archivo se recibe para descomprimir sea el correcto*/
+	string fin = "";
+	for (int i = (pathEntrada.size()-3); i < pathEntrada.size(); i++ ){
+		fin += pathEntrada.at(i);
+	}
+	if (fin != ".10"){
+		cout<<"Archivo invalido. No se puede descomprimir."<<endl;
+		return;
+	}
+	/*--------------------Fin de chequeo de archivo correcto----------------------*/
+
 	/*Creamos el archivo descomprimido*/
 	string nombre = "";
-	for (int a = 3; a < pathEntrada.size(); a++) nombre += pathEntrada.at(a);
+	for (int a = 0; a < pathEntrada.size()-3; a++) nombre += pathEntrada.at(a);
 	FILE* fd_archivoDescomprimido = fopen(nombre.c_str(), "w");
 
 	Ventana unaVentana = Ventana();
@@ -161,17 +166,6 @@ void Lz77::descompresor(string pathEntrada) {
 	ma.cerrarArchivo();
 	//elimina el archivo de entrada.
 	//ma.eliminarArchivo();
-
-	/*chequeamos que el tipo de archivo se recibe para descomprimir sea el correcto*/
-	string inicio = "";
-	for (int i = 0; i < 3; i++ ){
-		inicio += pathEntrada.at(i);
-	}
-	if (inicio != "LZ_"){
-		cout<<"Archivo invalido. No se puede descomprimir."<<endl;
-		return;
-	}
-	/*--------------------Fin de chequeo de archivo correcto----------------------*/
 
 	for(long int i = 0; i < cantidadElementos; i++){
 		//pasamos todo el archivo a binario para procesarlo
@@ -194,7 +188,6 @@ void Lz77::descompresor(string pathEntrada) {
 	/*------Completado el descarte de bits de relleno---------*/
 
 	/*Comenzamos a leer el archivo binario*/
-	cout<<"SIZE: "<<entrada.size()<<endl;
 	while (posicion <= entrada.size()-1){ //procesamos mientras no lleguemos al fin de archivo
 		unBit = entrada.at(posicion);
 		posicion ++;
