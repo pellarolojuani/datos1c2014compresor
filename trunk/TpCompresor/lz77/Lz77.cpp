@@ -28,6 +28,7 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 
 	ManejoArchivo ma(pathEntrada);
 	long int cantidadTerminos = ma.contarTerminosDeDocumento();
+	cout<<"terminos del documento: "<<cantidadTerminos<<endl;
 	int tamanioArchivo = 0;
 	string salida = ""; // aca guardariamos la salida previo a pasarla al file_out
 	OperacionesConBitsYBytes operador_bitbyte;
@@ -52,6 +53,7 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 	//---------------------------------------------------------------
 
 	ma.cargaInicialEnVentana(inspeccion);
+
 	int cant;
 
 	while ((cant = inspeccion->getCantidadElementos()) != 0){
@@ -75,7 +77,7 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 		}
 
 		else{
-			/*No hay match*/
+			//No hay match*/
 			caracter = this->inspeccion->getUltimoElemento();
 
 			//cout<<caracter;
@@ -84,14 +86,14 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 			this->memoria->agregarElemento(caracter);
 
 			if ( (caracter=='a') || (caracter=='e') || (caracter=='i') || (caracter=='o') || (caracter=='u') || (caracter=='t') || (caracter=='\n') || (caracter==' ') ){
-				/*Caracter especial*/
+				//Caracter especial*/
 				string agregar =  "11";	//el primer 1 indica que emite un caracter
 										//el segundo indica caracter especial
 				salida += agregar;
 				salida += operador_bitbyte.charEspecialAbinario(caracter);
 			}
 			else{
-				/*Caracter comun*/
+				//Caracter comun*/
 				string agregar =  "10";	//el primer 1 indica que emite caracter
 										//el 0 indica caracter comun
 				salida += agregar;
