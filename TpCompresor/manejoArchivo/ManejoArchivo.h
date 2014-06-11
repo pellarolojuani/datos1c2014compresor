@@ -25,6 +25,8 @@ private:
 	vector <byte> vbuffer;
 	string nombreArchivo;
 	string nombreDeArchivoSinBarra;
+	long int cantidadBytes;
+	bool eof;
 
 public:
 	ManejoArchivo();

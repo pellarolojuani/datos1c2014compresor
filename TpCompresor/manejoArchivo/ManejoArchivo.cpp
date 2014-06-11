@@ -16,6 +16,8 @@ ManejoArchivo::ManejoArchivo() {
 	fd_archivo = 0;
 	nombreArchivo = "";
 	nombreDeArchivoSinBarra = "";
+	this->cantidadBytes = 0;
+	eof = false;
 
 }
 
@@ -24,6 +26,8 @@ ManejoArchivo::ManejoArchivo(string pathEntrada) {
 	fd_archivo = fopen(pathEntrada.c_str(), READ);
 	if (fd_archivo == 0)
 		cout << "No se puede abrir el archivo" << "\n";
+	this->cantidadBytes = this->contarTerminosDeDocumento();
+	eof = false;
 }
 
 ManejoArchivo::~ManejoArchivo() {
@@ -36,6 +40,7 @@ void ManejoArchivo::abrirArchivo(std::string pathEntrada) {
 	fd_archivo = fopen(pathEntrada.c_str(), READ);
 	if (fd_archivo == 0)
 		cout << "No se puede abrir el archivo" << "\n";
+	this->cantidadBytes = this->contarTerminosDeDocumento();
 
 }
 
@@ -59,13 +64,19 @@ void ManejoArchivo::leerArchivoBitABit() {
 }
 
 long int ManejoArchivo::contarTerminosDeDocumento(){
-	//poco eficiente
-	int cantidad;
-	cantidad = 0;
-	while (fgetc(fd_archivo) != EOF) cantidad ++;
 
+	long int cantidad;
+	fseek(this->fd_archivo, 0, ios::end);
+	cantidad = ftell(this->fd_archivo);
+	this->cantidadBytes = cantidad;
 	rewind(fd_archivo);
 	return cantidad;
+	/*int cantidad;
+	cantidad = 0;
+	while (fgetc(fd_archivo) != ios::end) cantidad ++;
+
+	rewind(fd_archivo);
+	return cantidad;*/
 }
 
 bool ManejoArchivo::agregarCharEnVentana(Ventana* unaVentana){
@@ -73,7 +84,9 @@ bool ManejoArchivo::agregarCharEnVentana(Ventana* unaVentana){
 
 	char caracter;
 	caracter = fgetc(fd_archivo);
-	if (caracter == EOF) return false;
+
+	if (eof) return false;
+	if (ftell(fd_archivo) == this->cantidadBytes) eof = true;
 
 	unaVentana->agregarElemento(caracter);
 
@@ -87,12 +100,12 @@ bool ManejoArchivo::cargaInicialEnVentana(Ventana* unaVentana){
 	char caracter;
 
 	//caso de archivo menor al tamaño de la ventana
-	int cant = this->contarTerminosDeDocumento();
-	if (cant < 2048){
-		for (int j = 0; j < cant; j++){
+	if (this->cantidadBytes < 2048){
+		for (int j = 0; j < this->cantidadBytes; j++){
 			caracter = fgetc(fd_archivo);
 			unaVentana->agregarElemento(caracter);
 		}
+		eof = true;
 	}
 	//caso de archivo mayor al tamaño de la ventana
 	else{
@@ -100,6 +113,7 @@ bool ManejoArchivo::cargaInicialEnVentana(Ventana* unaVentana){
 			caracter = fgetc(fd_archivo);
 			unaVentana->agregarElemento(caracter);
 		}
+		if (ftell(fd_archivo) == this->cantidadBytes) eof = true;
 	}
 
 	return true;
