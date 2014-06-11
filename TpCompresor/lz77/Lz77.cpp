@@ -28,7 +28,6 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 
 	ManejoArchivo ma(pathEntrada);
 	long int cantidadTerminos = ma.contarTerminosDeDocumento();
-	cout<<"terminos del documento: "<<cantidadTerminos<<endl;
 	int tamanioArchivo = 0;
 	string salida = ""; // aca guardariamos la salida previo a pasarla al file_out
 	OperacionesConBitsYBytes operador_bitbyte;
