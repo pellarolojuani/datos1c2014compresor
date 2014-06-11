@@ -221,6 +221,37 @@ void Lz77::descompresor(string pathEntrada) {
 		}
 		else{
 			//caso MATCH
+			string stringLongitud = "";
+			string stringPosicion = "";
+			string stringCharSiguiente = "";
+			int longitud, pos;
+
+			for (int i = 0; i < 11; i++){
+				stringLongitud += entrada.at(posicion);
+				posicion ++;
+			}
+			for (int j = 0; j < 11; j++){
+				stringPosicion += entrada.at(posicion);
+				posicion ++;
+			}
+			longitud = operador_bitbyte.getLongitud(stringLongitud);
+			pos = operador_bitbyte.getLongitud(stringPosicion);
+
+			//buscamos en la ventana los elementos que hicieron match
+			for (int k = 0; k < longitud; k++){
+				unChar = unaVentana.getElementoEnPosicion(pos);//copia el elemento que hizo match
+				pos --;
+				unaVentana.agregarElemento(unChar);//pone el elemento al final de la ventana
+				fputc(unChar, fd_archivoDescomprimido);
+			}
+			//agregamos ahora el caracter siguiente
+			for (int m = 0; m < 8; m++){
+				stringCharSiguiente  += entrada.at(posicion);
+				posicion ++;
+			}
+			unChar = operador_bitbyte.binarioAchar(stringCharSiguiente);
+			unaVentana.agregarElemento(unChar);
+			fputc(unChar, fd_archivoDescomprimido);
 		}
 	}
 	fclose(fd_archivoDescomprimido);
