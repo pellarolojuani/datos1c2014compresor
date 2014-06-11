@@ -20,7 +20,7 @@ int OperacionesEntreVentanas::buscarMaximoMatch(Ventana* inspeccion, Ventana* me
 	/*busca el maximo match dentro de la ventana de memoria y devuelve la posicion.
 	PRE: La ventana de inspeccion ya tiene que estar cargada*/
 	*tamanioMatch = 0;
-	int posInspeccion = inspeccion->getCantidadElementos(); //primera elemento de la ventana de inspeccion a comparar
+	int posInspeccion = inspeccion->getCantidadElementos()-1; //primera elemento de la ventana de inspeccion a comparar
 	int posMaximoMatch = -1;
 	int unMatch; //para ir sumando y comparando con el maximo match
 
