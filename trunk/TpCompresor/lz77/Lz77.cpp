@@ -238,11 +238,15 @@ void Lz77::descompresor(string pathEntrada) {
 			pos = operador_bitbyte.getLongitud(stringPosicion);
 
 			//buscamos en la ventana los elementos que hicieron match
+			string match = "";
 			for (int k = 0; k < longitud; k++){
 				unChar = unaVentana.getElementoEnPosicion(pos);//copia el elemento que hizo match
 				pos --;
-				unaVentana.agregarElemento(unChar);//pone el elemento al final de la ventana
+				match.push_back(unChar);
 				fputc(unChar, fd_archivoDescomprimido);
+			}
+			for (int i = 0; i < match.size(); i++){
+				unaVentana.agregarElemento(match.at(i));//pone el elemento al final de la ventana
 			}
 			//agregamos ahora el caracter siguiente
 			for (int m = 0; m < 8; m++){
