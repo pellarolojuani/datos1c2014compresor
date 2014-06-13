@@ -25,6 +25,7 @@ int OperacionesEntreVentanas::buscarMaximoMatch(Ventana* inspeccion, Ventana* me
 	int posMaximoMatch = -1;
 	int unMatch; //para ir sumando y comparando con el maximo match
 	char caracter;
+	int i = 0; 	//contador...
 
 	memoria->inicializarMatch(); //para comenzar buscando desde el principio de la ventana
 
@@ -40,12 +41,14 @@ int OperacionesEntreVentanas::buscarMaximoMatch(Ventana* inspeccion, Ventana* me
 		if (posicionAux != -1){
 			unMatch ++;
 			posInspeccion --;
+			i ++;
 			int aux = posicionAux -1;
 			//a partir de ahora cuenta cuantos caracteres hay de match
 			while ((inspeccion->getElementoEnPosicion(posInspeccion) == memoria->getElementoEnPosicion(aux))
-					&& (posInspeccion >= 0 && aux >= 0)){
+					&& (posInspeccion >= 0 && aux >= 0) && i < inspeccion->getCantidadElementos() - 1){
 				unMatch ++;
 				posInspeccion --;
+				i ++;
 				aux --;
 				//el siguiente if se aplica cuando se encontro el elemento en la posicion 0 de memoria
 				//if ( aux < 0 ){
