@@ -103,7 +103,7 @@ void Lz77::compresor(string pathEntrada, FILE* file_out) {
 	}
 
 	/*----------Relleno-----------*/
-	int resto = strlen(salida.c_str()) % 8;
+	int resto = salida.size() % 8;
 	salida += "1";
 	for (int j = 0; j < (8-resto-1); j++){
 		salida += "0";
@@ -259,6 +259,7 @@ void Lz77::descompresor(string pathEntrada) {
 			fputc(unChar, fd_archivoDescomprimido);
 		}
 	}
+
 	fclose(fd_archivoDescomprimido);
 }
 
